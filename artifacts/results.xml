@@ -1,0 +1,14 @@
+<testsuites id="" name="" tests="4" failures="0" skipped="0" errors="0" time="19.703518">
+<testsuite name="wiki.links.spec.ts" timestamp="2026-03-03T14:55:07.223Z" hostname="chromium" tests="2" failures="0" skipped="0" time="5.03" errors="0">
+<testcase name="Wikipedia homepage title" classname="wiki.links.spec.ts" time="2.197">
+</testcase>
+<testcase name="Wikipedia English link works" classname="wiki.links.spec.ts" time="2.833">
+</testcase>
+</testsuite>
+<testsuite name="wiki.links.spec.ts" timestamp="2026-03-03T14:55:07.223Z" hostname="edge" tests="2" failures="0" skipped="0" time="7.855" errors="0">
+<testcase name="Wikipedia homepage title" classname="wiki.links.spec.ts" time="3.529">
+</testcase>
+<testcase name="Wikipedia English link works" classname="wiki.links.spec.ts" time="4.326">
+</testcase>
+</testsuite>
+</testsuites>
