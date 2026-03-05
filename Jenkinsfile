@@ -37,7 +37,10 @@ pipeline {
                 publishHTML([
                     reportDir: 'artifacts/html-report',
                     reportFiles: 'index.html',
-                    reportName: 'Playwright HTML Report'
+                    reportName: 'Playwright HTML Report',
+                    keepAll: true,
+                    alwaysLinkToLastBuild: true,
+                    allowMissing: true
                 ])
             }
         }
