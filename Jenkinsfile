@@ -12,7 +12,7 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                bat 'docker build --no-cache -t playwright-tests .'
+                bat 'docker build -t playwright-tests .'
             }
         }
 
