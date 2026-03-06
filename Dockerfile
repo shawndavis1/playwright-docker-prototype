@@ -16,4 +16,4 @@ RUN npm ci --include=dev
 COPY . .
 
 # Default command to run tests
-CMD ["npx", "playwright", "test"]
+CMD ["npx", "--yes", "playwright", "test"]
