@@ -1,19 +1,17 @@
-# Use official Playwright image
 FROM mcr.microsoft.com/playwright:v1.42.1-jammy
 
-# Set working directory
 WORKDIR /app
 
-# Copy package files first for caching
-COPY package*.json ./
+# Copy dependency files first (better caching)
+COPY package.json package-lock.json ./
 
 # Install dependencies
-RUN npm install
+RUN npm ci
 
-# Copy project files
+# Copy rest of project
 COPY . .
 
-# Install Playwright browsers
+# Install browsers
 RUN npx playwright install
 
 # --- Install Microsoft Edge ---
@@ -22,8 +20,4 @@ RUN wget https://packages.microsoft.com/keys/microsoft.asc -O- | apt-key add - \
  && apt update \
  && apt install -y microsoft-edge-stable
 
-# Specify where playwright lives
-ENV PATH="/app/node_modules/.bin:${PATH}"
-
-# Default command to run tests
 CMD ["npx", "playwright", "test"]
