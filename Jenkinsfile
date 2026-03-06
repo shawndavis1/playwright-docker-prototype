@@ -21,7 +21,8 @@ pipeline {
                 bat '''
                 docker run --rm ^
                   -v %WORKSPACE%\\artifacts:/app/artifacts ^
-                  playwright-tests
+                  playwright-tests^
+                  npx playwright test
                 '''
             }
         }
