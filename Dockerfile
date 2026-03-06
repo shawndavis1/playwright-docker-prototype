@@ -1,23 +1,19 @@
-FROM mcr.microsoft.com/playwright:v1.42.1-jammy
+# Modern Playwright image
+FROM mcr.microsoft.com/playwright:v1.58.0-jammy
 
 WORKDIR /app
 
+# Upgrade npm to latest to avoid lockfile issues
+RUN npm install -g npm@11
+
 # Copy dependency files first (better caching)
-COPY package.json package-lock.json ./
+COPY package*.json ./
 
-# Install dependencies
-RUN npm ci
+# Install dependencies (dev included)
+RUN npm ci --include=dev
 
-# Copy rest of project
+# Copy the rest of the project
 COPY . .
 
-# Install browsers
-RUN npx playwright install
-
-# --- Install Microsoft Edge ---
-RUN wget https://packages.microsoft.com/keys/microsoft.asc -O- | apt-key add - \
- && sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/edge stable main" > /etc/apt/sources.list.d/microsoft-edge.list' \
- && apt update \
- && apt install -y microsoft-edge-stable
-
+# Default command to run tests
 CMD ["npx", "playwright", "test"]
