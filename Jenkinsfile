@@ -10,12 +10,11 @@ pipeline {
             }
         }
 
-stage('Debug Repo') {
+stage('Debug Env') {
     steps {
-        bat 'type package.json'
+        bat 'echo NODE_ENV=%NODE_ENV%'
     }
 }
-
         stage('Build Docker Image') {
             steps {
                 bat 'docker build -t playwright-tests .'
