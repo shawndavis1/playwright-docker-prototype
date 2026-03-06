@@ -24,7 +24,7 @@ stage('Debug Env') {
         stage('Run Tests in Container') {
             steps {
                 bat '''
-                docker run --rm -v C:\ProgramData\Jenkins\.jenkins\workspace\Playwright-Docker-CI\artifacts:/app/artifacts \playwright-tests
+                docker run --rm -v C:\ProgramData\Jenkins\.jenkins\workspace\Playwright-Docker-CI\artifacts:/app/artifacts playwright-tests
             }
         }
 
