@@ -10,6 +10,12 @@ pipeline {
             }
         }
 
+stage('Debug Repo') {
+    steps {
+        bat 'type package.json'
+    }
+}
+
         stage('Build Docker Image') {
             steps {
                 bat 'docker build -t playwright-tests .'
