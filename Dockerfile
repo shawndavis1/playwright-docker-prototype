@@ -22,5 +22,8 @@ RUN wget https://packages.microsoft.com/keys/microsoft.asc -O- | apt-key add - \
  && apt update \
  && apt install -y microsoft-edge-stable
 
+# Specify where playwright lives
+ENV PATH="/app/node_modules/.bin:${PATH}"
+
 # Default command to run tests
 CMD ["npx", "playwright", "test"]
