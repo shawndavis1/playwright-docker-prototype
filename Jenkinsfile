@@ -1,47 +1,23 @@
 pipeline {
-  agent {
-    docker {
-      image 'mcr.microsoft.com/playwright:v1.58.0-jammy'
-      args '-u root'
-    }
-  }
-
-    stage('Install Dependencies') {
-      steps {
-        sh 'npm ci'
-      }
+    agent {
+        docker {
+            image 'mcr.microsoft.com/playwright:v1.58.0-jammy'
+        }
     }
 
-    stage('Run Tests') {
-      steps {
-        sh 'npx playwright test --reporter=junit,html'
-      }
-    }
+    stages {
 
-    stage('Publish Test Results') {
-      steps {
-        junit 'test-results/*.xml'
-      }
-    }
+        stage('Install Dependencies') {
+            steps {
+                sh 'npm ci'
+            }
+        }
 
-    stage('Publish HTML Report') {
-      steps {
-        publishHTML(target: [
-          reportDir: 'playwright-report',
-          reportFiles: 'index.html',
-          reportName: 'Playwright Report',
-          keepAll: true,
-          alwaysLinkToLastBuild: true,
-          allowMissing: true
-        ])
-      }
-    }
+        stage('Run Playwright Tests') {
+            steps {
+                sh 'npx playwright test'
+            }
+        }
 
-  }
-
-  post {
-    always {
-      archiveArtifacts artifacts: 'playwright-report/**', fingerprint: true
     }
-  }
 }
