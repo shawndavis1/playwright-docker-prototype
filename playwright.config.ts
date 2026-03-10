@@ -11,7 +11,7 @@ export default defineConfig({
   ['junit', { outputFile: 'test-results/results.xml' }],
   ],
   projects: [
-  { name: 'chromium', use: { browserName: 'chromium' } },
-  { name: 'edge', use: { browserName: 'chromium', channel: 'msedge' } },
+  { name: 'chromium', use: { browserName: 'chromium' }},
+  { name: 'msedge', use: { channel: 'msedge' }}
 ],
 });
