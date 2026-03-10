@@ -20,36 +20,36 @@ pipeline {
       }
     }
 
-    stage('Run Playwright Tests') {
+    stage('Run Tests') {
       steps {
         sh 'npx playwright test --reporter=junit,html'
       }
     }
 
-    stage('Publish JUnit') {
+    stage('Publish Test Results') {
       steps {
-        junit '**/results.xml'
+        junit 'test-results/*.xml'
       }
     }
 
     stage('Publish HTML Report') {
-    steps {
+      steps {
         publishHTML(target: [
-            reportDir: 'playwright-report',
-            reportFiles: 'index.html',
-            reportName: 'Playwright Report',
-            keepAll: true,
-            alwaysLinkToLastBuild: true,
-            allowMissing: true
+          reportDir: 'playwright-report',
+          reportFiles: 'index.html',
+          reportName: 'Playwright Report',
+          keepAll: true,
+          alwaysLinkToLastBuild: true,
+          allowMissing: true
         ])
+      }
     }
-}
 
   }
 
   post {
     always {
-      archiveArtifacts artifacts: 'playwright-report/**'
+      archiveArtifacts artifacts: 'playwright-report/**', fingerprint: true
     }
   }
 }
