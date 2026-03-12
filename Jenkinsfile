@@ -6,18 +6,11 @@ pipeline {
     }
 
     stages {
-
-        stage('Install Dependencies') {
+        stage('Run Tests') {
             steps {
                 sh 'npm ci'
-            }
-        }
-
-        stage('Run Playwright Tests') {
-            steps {
                 sh 'npx playwright test'
             }
         }
-
     }
 }
